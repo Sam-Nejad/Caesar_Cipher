@@ -84,5 +84,4 @@ def runAgain():
         print("Not a valid choice, please choose either yes or no.\n")
         runAgain()
 
-
-getOption()
+# getOption()
