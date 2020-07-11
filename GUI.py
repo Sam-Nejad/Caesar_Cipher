@@ -12,23 +12,29 @@ layout = [[sg.Text("Do you want to encrypt, decipher or brute force a message?")
 
 window = sg.Window('Caesar_Cipher', layout)
 
-while True:  # Event Loop
+# TODO add input validation with outputs depending on what is incorrect
+
+while True:
     event, values = window.read()
     print(event, values)
-    text = values['-STRING-']
-    shift = int(values['-SHIFT-'])
     if event == sg.WIN_CLOSED or event == 'Exit':
         break
-    if event == 'Encrypt':
-        window['-OUTPUT-'].update(encrypt(text, shift))
-    if event == 'Decipher':
-        window['-OUTPUT-'].update(decipher(text, shift))
-    if event == 'Brute Force':
+    if event == 'Encrypt' and values['-STRING-'] and values['-STRING-'].isalpha():
+        if values['-SHIFT-'] and values['-SHIFT-'].isdigit():
+            text = values['-STRING-']
+            shift = int(values['-SHIFT-'])
+            window['-OUTPUT-'].update(encrypt(text, shift))
+    if event == 'Decipher' and values['-STRING-'] and values['-STRING-'].isalpha():
+        if values['-SHIFT-'] and values['-SHIFT-'].isdigit():
+            text = values['-STRING-']
+            shift = int(values['-SHIFT-'])
+            window['-OUTPUT-'].update(decipher(text, shift))
+    if event == 'Brute Force' and values['-STRING-'] and values['-STRING-'].isalpha():
+        text = values['-STRING-']
         alphabet = 26
+        brute = ""
         for key in range(1, alphabet + 1):
-            print(key, decipher(text, key))
-        print("")
-        #window['-OUTPUT-'].update(values['-IN-'])
+            brute = brute + "\n" + str(key) + " " + decipher(text, key)
+        sg.popup(brute)
 
 window.close()
-
