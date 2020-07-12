@@ -1,3 +1,5 @@
+import PySimpleGUI as sg
+
 
 def encrypt(string, shift):
     cipher = ''
@@ -23,64 +25,50 @@ def decipher(string, shift):
     return cipher
 
 
-def getOption():
-    option = str(input("Do you want to encrypt, decipher or brute force a message?\n"))
-    if option == "encrypt":
-        text = input("Enter string to encrypt: ")
-        if text.isalpha():
-            shift = str(input("Enter shift number: "))
-            if shift.isdigit():
-                shift = int(shift)
-                print("Original string: ", text)
-                print("After encryption:", encrypt(text, shift) + "\n")
-                runAgain()
+sg.theme('SystemDefault')
+
+layout = [[sg.Text("Do you want to encrypt, decipher or brute force a message?")],
+          [sg.Text("String: "), sg.Input(key='-STRING-')],
+          [sg.Text("Shift:   "), sg.Input(key='-SHIFT-')],
+          [sg.Text(size=(35, 1), key='-OUTPUT-')],
+          [sg.Button('Encrypt'), sg.Button('Decipher'), sg.Button('Brute Force'), sg.Button('Exit')]]
+
+window = sg.Window('Caesar_Cipher', layout)
+
+while True:
+    event, values = window.read()
+    print(event, values)
+    if event == sg.WIN_CLOSED or event == 'Exit':
+        break
+    if event == 'Encrypt' and values['-STRING-'] and values['-SHIFT-']:
+        if values['-STRING-'].isalpha():
+            if values['-SHIFT-'].isdigit():
+                text = values['-STRING-']
+                shift = int(values['-SHIFT-'])
+                window['-OUTPUT-'].update(encrypt(text, shift))
             else:
-                print("Given shift is not number.\n")
-                getOption()
+                window['-OUTPUT-'].update("Given shift is not number.")
         else:
-            print("Given string is not alphabetic.\n")
-            getOption()
-    if option == "decipher":
-        text = input("Enter string to decipher: ")
-        if text.isalpha():
-            shift = str(input("Enter shift number: "))
-            if shift.isdigit():
-                shift = int(shift)
-                print("Original string: ", text)
-                print("After deciphering:", decipher(text, shift) + "\n")
-                runAgain()
+            window['-OUTPUT-'].update("Given string is not alphabetic.")
+    if event == 'Decipher' and values['-STRING-'] and values['-SHIFT-']:
+        if values['-STRING-'].isalpha():
+            if values['-SHIFT-'].isdigit():
+                text = values['-STRING-']
+                shift = int(values['-SHIFT-'])
+                window['-OUTPUT-'].update(decipher(text, shift))
             else:
-                print("Given shift is not number.\n")
-                getOption()
+                window['-OUTPUT-'].update("Given shift is not number.")
         else:
-            print("Given string is not alphabetic.\n")
-            getOption()
-    if option == "brute force":
-        text = input("Enter string to brute force: ")
-        if text.isalpha():
-            print("Original string: ", text)
+            window['-OUTPUT-'].update("Given string is not alphabetic.")
+    if event == 'Brute Force' and values['-STRING-']:
+        if values['-STRING-'].isalpha():
+            text = values['-STRING-']
             alphabet = 26
-            print("After deciphering:")
+            brute = ""
             for key in range(1, alphabet + 1):
-                print(key, decipher(text, key))
-            print("")
-            runAgain()
+                brute = brute + "\n" + str(key) + " " + decipher(text, key)
+            sg.popup(brute)
         else:
-            print("Given string is not alphabetic.\n")
-            getOption()
-    else:
-        print("Not a valid choice, please choose either encrypt, decipher or brute force.\n")
-        getOption()
+            window['-OUTPUT-'].update("Given string is not alphabetic.")
 
-
-def runAgain():
-    option = input("Do you want to use this program again?\n")
-    if option == "yes":
-        getOption()
-    elif option == "no":
-        exit()
-    else:
-        print("Not a valid choice, please choose either yes or no.\n")
-        runAgain()
-
-# getOption()
+window.close()

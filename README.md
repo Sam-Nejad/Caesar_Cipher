@@ -1,6 +1,6 @@
 # Caesar_Cipher
 
-A simple program that encrypts and deciphers the Caesar cipher. Includes both a text based, and GUI to interact with the program. 
+A simple program that encrypts and deciphers the Caesar cipher. 
 
 ## Getting Started
 
@@ -14,9 +14,7 @@ A simple program that encrypts and deciphers the Caesar cipher. Includes both a 
 ### Installing
 
 * Download Caesar_Cipher.py and GUI.py and place them in the folder you want to run them from
-* Decide whether you want to use the text based or GUI
-    * For the text based uncomment line 87 #getOption() and run Caesar_Cipher.py in Python
-    * For the GUI all you have to do is run GUI.py in Python
+* Run Caesar_Cipher.py in Python
 * Only use alphabetic characters for the strings and digits for the shift number
 
 ## License
