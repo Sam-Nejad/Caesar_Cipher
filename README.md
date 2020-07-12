@@ -4,17 +4,12 @@ A simple program that encrypts and deciphers the Caesar cipher.
 
 ## Getting Started
 
-### Prerequisites
-
-* Python 3
-* pip - The Python Package Installer
-    * PySimpleGUI 
-
 
 ### Installing
 
 * Download Caesar_Cipher.exe and run it
 * Only use alphabetic characters for the strings and digits for the shift number
+* Can either encrypt or decipher with a shift key or brute force all possible combinations. 
 
 ## License
 
