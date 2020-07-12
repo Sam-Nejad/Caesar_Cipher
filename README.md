@@ -13,8 +13,7 @@ A simple program that encrypts and deciphers the Caesar cipher.
 
 ### Installing
 
-* Download Caesar_Cipher.py and GUI.py and place them in the folder you want to run them from
-* Run Caesar_Cipher.py in Python
+* Download Caesar_Cipher.exe and run it
 * Only use alphabetic characters for the strings and digits for the shift number
 
 ## License
