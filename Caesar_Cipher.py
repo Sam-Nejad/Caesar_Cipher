@@ -1,4 +1,3 @@
-# https://www.thecrazyprogrammer.com/2018/05/caesar-cipher-in-python.html
 
 def encrypt(string, shift):
     cipher = ''
